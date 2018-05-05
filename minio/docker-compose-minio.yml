@@ -102,7 +102,7 @@ services:
           hostname: "gpdb-minio"
           container_name: gpdb-minio
           ports:
-           - "5432:5432"
+           - "6432:5432"
            - "5005:5005"
            - "5010:5010"
            - "9022:22"
