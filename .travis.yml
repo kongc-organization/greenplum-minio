@@ -39,7 +39,7 @@ before_install:
 
 script:
   - ls -lah
-  - docker-compose -f ./minio/docker-compose-minio.yml up
+  - docker-compose -f ./minio/docker-compose-minio.yml up &
   - docker ps
   #- docker exec minio1 ls
   #- docker exec minioclient /usr/bin/mc cp /data/S3Examples/stocks.csv minio/testbucket;
