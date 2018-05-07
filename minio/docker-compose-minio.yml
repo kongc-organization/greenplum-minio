@@ -110,7 +110,7 @@ services:
            - "40001:40001"
            - "40002:40002"
           expose:
-           - "5432"
+           - "6432"
           volumes:
            - ..:/code
           privileged: true

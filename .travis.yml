@@ -28,8 +28,8 @@ before_install:
   # before doing the update.
   - docker-compose --version
 
-  # Setup 
- 
+  # Setup
+
 
 
   # You will want this for logging. If one of your containers does not build for
@@ -42,9 +42,9 @@ script:
   - docker-compose -f ./minio/docker-compose-minio.yml up
   - docker ps
   #- docker exec minio1 ls
-  - docker exec minioclient /usr/bin/mc cp /data/S3Examples/stocks.csv minio/testbucket;
+  #- docker exec minioclient /usr/bin/mc cp /data/S3Examples/stocks.csv minio/testbucket;
   - wait 4
-  - 
+  -
 notifications:
   email:
     - kongyew@gmail.com

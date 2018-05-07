@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Greenplum with Minio</title>
+    <description>How to use Greenplum with Minio</description>
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Using Greenplum with Minio!</title>
+        <description>
+          
+          Using Greenplum with Minio This repository demonstrates how to use configure Greenplum with Minio. Pivotal Greenplum The Pivotal Greenplum Database (GPDB) is an advanced, fully featured, open source data warehouse. It provides powerful and rapid analytics on petabyte scale data volumes. Uniquely geared toward big data analytics, Greenplum Database is...
+        </description>
+        <pubDate>Fri, 20 Apr 2018 14:54:07 -0700</pubDate>
+        <link>http://localhost:4000/2018-04-20-greenplum-minio/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018-04-20-greenplum-minio/</guid>
+      </item>
+    
+  </channel>
+</rss>
