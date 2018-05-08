@@ -30,21 +30,22 @@ before_install:
 
   # Setup
 
-
-
   # You will want this for logging. If one of your containers does not build for
   # whatever reason it's best to report that now before your tests start
   # otherwise it can be really tricky to debug why tests are failing sometimes.
   - docker ps
-
+  - cd ${TRAVIS_BUILD_DIR}
+  - wget https://dl.minio.io/client/mc/release/linux-amd64/mc
+  - chmod +x mc
 script:
   - ls -lah
   - docker-compose -f ./minio/docker-compose-minio.yml up &
   - docker ps
-  #- docker exec minio1 ls
-  #- docker exec minioclient /usr/bin/mc cp /data/S3Examples/stocks.csv minio/testbucket;
-  - wait 4
+  - cd ${TRAVIS_BUILD_DIR}
+  - ./mc cp /minio/S3Examples/stocks.csv minio/testbucket;
+  - ./mc --help
   -  docker-compose -f ./minio/docker-compose-minio.yml down
+
 notifications:
   email:
     - kongyew@gmail.com
