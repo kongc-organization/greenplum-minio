@@ -42,7 +42,7 @@ script:
   - docker-compose -f ./minio/docker-compose-minio.yml up &
   - docker ps
   - cd ${TRAVIS_BUILD_DIR}
-  - ./mc cp /minio/S3Examples/stocks.csv minio/testbucket;
+#  - ./mc cp /minio/S3Examples/stocks.csv minio/testbucket;
   - ./mc --help
   -  docker-compose -f ./minio/docker-compose-minio.yml down
 
