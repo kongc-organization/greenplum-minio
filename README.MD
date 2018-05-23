@@ -192,3 +192,6 @@ gpadmin=# select * from stock_fact_external limit 10;
  MSFT   | Sep 1 2000 | 24.53
 (10 rows)
 ```
+
+# Reference:
+[Blog about Greenplum with Minio](https://kongc-organization.github.io/greenplum-minio/)
