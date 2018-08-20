@@ -1,6 +1,7 @@
 # Using Greenplum with S3 extensions to access external data - Minio, distributed object storage
 [![Build Status](https://travis-ci.org/kongc-organization/greenplum-minio.svg?branch=master)](https://travis-ci.org/kongc-organization/greenplum-minio)
-This readme describes how to configure [Greenplum](greenplum.org) and [Minio](https://minio.io/) and uses [S3 extension](https://gpdb.docs.pivotal.io/570/admin_guide/external/g-s3-protocol.html) to access objects that are stored inside Minio.
+
+This readme describes how to configure [Greenplum](greenplum.org) and [Minio](https://minio.io/) and use [S3 extension](https://gpdb.docs.pivotal.io/570/admin_guide/external/g-s3-protocol.html) to access objects that are stored inside Minio.
 
 Feel free to propose changes and improvements.
 
@@ -9,6 +10,7 @@ Feel free to propose changes and improvements.
 1. [docker-compose](https://docs.docker.com/compose/)
 1. [Minio docker image](https://hub.docker.com/r/minio/minio/)
 1. [GPDB open source docker image](https://hub.docker.com/r/kochanpivotal/gpdb5oss/)
+
 
 This document assumes you have basic working knowledge to use docker, docker-compose and Linux/Mac terminal.
 
@@ -52,31 +54,11 @@ testdata.csv
 
 1. Use docker command to access GPDB docker instance.
 ```
-$ docker exec -it gpdb-minio bash
+$ docker exec -it gpdbminio bash
  root@gpdb-minio:/#
 ```
 
-2. Use "startGPDB.sh" script to start Greenplum instance
-
-```
-root@gpdb-minio:/# startGPDB.sh
-SSHD isn't running
- * Starting OpenBSD Secure Shell server sshd                                                 [ OK ]
-SSHD is running...
-20180413:18:59:52:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Starting gpstart with args: -a
-20180413:18:59:52:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Gathering information and validating the environment...
-20180413:18:59:52:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Greenplum Binary Version: 'postgres (Greenplum Database) 5.5.0 build 67afa18-oss'
-20180413:18:59:52:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Greenplum Catalog Version: '301705051'
-20180413:18:59:52:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Starting Master instance in admin mode
-20180413:18:59:54:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Obtaining Greenplum Master catalog information
-20180413:18:59:54:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Obtaining Segment details from master...
-20180413:18:59:54:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Setting new master era
-20180413:18:59:54:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Master Started...
-20180413:18:59:55:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Heap checksum setting is consistent across the cluster
-20180413:18:59:55:000084 gpstart:gpdb-minio:gpadmin-[INFO]:-Shutting down master
-...
-```
-3. Verify Greenplum process is running by running `ps -elf | grep gpdb`
+2. Verify Greenplum process is running by running `ps -elf | grep gpdb`
 
 ```
 root@gpdb-minio:/# ps -elf | grep gpdb
@@ -119,7 +101,7 @@ File: testdata.csv, Size: 138
 Use psql on the Greenplum docker instance.
 
 ```
-docker exec -it gpdb-minio bash
+docker exec -it gpdbminio bash
  root@gpdb-minio:/#
 root@gpdb-minio:/code/minio/S3Examples# psql -h localhost -U gpadmin gpadmin
 psql (9.5.12, server 8.3.23)
@@ -136,6 +118,7 @@ gpadmin=#
 `CREATE PROTOCOL s3 (writefunc = write_to_s3,readfunc = read_from_s3);`
 
 
+For example:
 ```
 psql (9.5.12, server 8.3.23)
 Type "help" for help.
@@ -154,6 +137,17 @@ gpadmin-# LANGUAGE C STABLE;
 CREATE FUNCTION
 ```
 5. Create external table that refers to Minio instance that uses the hostname `minio1` with port 9000
+
+SQL Example:
+```
+CREATE EXTERNAL TABLE stock_fact_external (
+ stock text,
+ stock_date text,
+ price text
+ ) LOCATION('s3://minio1:9000/testbucket/stocks.csv config=/home/gpadmin/s3.conf') FORMAT 'TEXT'(DELIMITER=',');
+```
+
+For example:
 
 ```
 gpadmin=# CREATE EXTERNAL TABLE stock_fact_external (

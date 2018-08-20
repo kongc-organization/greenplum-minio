@@ -6,6 +6,8 @@ services:
     minio1:
       hostname: "minio1"
       container_name: "minio1"
+      environment:
+        - COMPOSE_HTTP_TIMEOUT=120 # default is 60
       image: minio/minio
       volumes:
        - data1:/data
@@ -23,6 +25,8 @@ services:
     minio2:
       hostname: "minio2"
       container_name: "minio2"
+      environment:
+        - COMPOSE_HTTP_TIMEOUT=120 # default is 60
       image: minio/minio
       volumes:
        - data2:/data
@@ -40,6 +44,8 @@ services:
     minio3:
       hostname: "minio3"
       container_name: "minio3"
+      environment:
+        - COMPOSE_HTTP_TIMEOUT=120 # default is 60
       image: minio/minio
       volumes:
        - data3:/data
@@ -56,6 +62,8 @@ services:
     minio4:
       hostname: "minio4"
       container_name: "minio4"
+      environment:
+        - COMPOSE_HTTP_TIMEOUT=120 # default is 60
       image: minio/minio
       volumes:
        - data4:/data
@@ -72,9 +80,14 @@ services:
     minioclient:
       hostname: "minioclient"
       container_name: "minioclient"
+      environment:
+        - COMPOSE_HTTP_TIMEOUT=120 # default is 60
       image: minio/mc
       depends_on:
         - minio1
+        - minio2
+        - minio3
+        - minio4
       entrypoint:
         /bin/sh -c "
         /usr/bin/mc config host add minio http://minio1:9001 minio minio123;
@@ -82,7 +95,8 @@ services:
         /usr/bin/mc cp /data/S3Examples/stocks.csv minio/testbucket;
         /usr/bin/mc cp /data/S3Examples/testdata.csv minio/testbucket;
         /usr/bin/mc cp /data/S3Examples/read_stocks.sql minio/testbucket;
-        /usr/bin/mc policy download minio/testbucket;"
+        /usr/bin/mc policy download minio/testbucket;
+        /bin/bash"
       volumes:
        - .:/data
       environment:
@@ -101,14 +115,17 @@ services:
           command: bin/bash
           hostname: "gpdb-minio"
           container_name: gpdb-minio
+          environment:
+            - START_GPDB=yes
+            - COMPOSE_HTTP_TIMEOUT=120 # default is 60
           ports:
-           - "6432:5432"
-           - "5005:5005"
-           - "5010:5010"
-           - "9022:22"
-           - "40000:40000"
-           - "40001:40001"
-           - "40002:40002"
+           - "16432:5432"
+           - "15005:5005"
+           - "15010:5010"
+           - "19022:22"
+           - "50000:40000"
+           - "50001:40001"
+           - "50002:40002"
           expose:
            - "6432"
           volumes:

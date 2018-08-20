@@ -9,4 +9,5 @@ docker run  -it -h minioclient \
     --publish 11000:11000 \
     --publish 50070:50070 \
     --volume /tmp:/tmp/volume \
-    ${DOCKER_TAG} /bin/bash
+--entrypoint=/bin/sh \
+    ${DOCKER_TAG} bash

@@ -13,9 +13,9 @@ world
 
 # Table of Contents
 1. [Pre-requisites](#Pre-requisites)
-2. [Using docker-compose](#Using docker-compose)
-3. [Connect to Greenplum and Minio with S3 protocol](#Connect to Greenplum and Minio with S3 protocol)
-4. [Read data from Minio](#Read data from Minio)
+2. [Using docker-compose](#Using-docker-compose)
+3. [Connect to Greenplum and Minio with S3 protocol](#Connect-to-Greenplum-and-Minio-with-S3-protocol)
+4. [Read data from Minio](#Read-data-from-Minio)
 
 ## Pre-requisites:
 - [docker-compose](http://docs.docker.com/compose)
@@ -26,12 +26,12 @@ world
 1. First, make sure you have installed [docker](https://www.docker.com/get-docker) on your machine. Next you use docker to install pre-created image with Greenplum Open Source binaries. For example, if you run the command below, it will download the latest image and run the instance.
 
 ```
-docker run -it --hostname=gpdb5oss --name gpdb5oss --publish 5432:5432 --publish 88:22 kochanpivotal/gpdb5oss bin/bash
+docker run -it --hostname=gpdbminio --name gpdbminio --publish 5432:5432 --publish 88:22 kochanpivotal/gpdb5oss bin/bash
 ```
 
 2. To access `Greenplum cluster`, exec into a container:
 ```
-    $ docker exec -it gpdb5oss bash
+    $ docker exec -it gpdbminio bash
 ```
 ## Configure Minio with some data
 
