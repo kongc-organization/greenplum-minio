@@ -1,4 +1,4 @@
-# Using Greenplum with S3 extensions to access external data - Minio, distributed object storage
+# Using Greenplum with S3 extensions to access Minio, distributed object storage
 [![Build Status](https://travis-ci.org/kongc-organization/greenplum-minio.svg?branch=master)](https://travis-ci.org/kongc-organization/greenplum-minio)
 
 This readme describes how to configure [Greenplum](greenplum.org) and [Minio](https://minio.io/) and use [S3 extension](https://gpdb.docs.pivotal.io/570/admin_guide/external/g-s3-protocol.html) to access objects that are stored inside Minio.
