@@ -11,7 +11,6 @@ Feel free to propose changes and improvements.
 1. [Minio docker image](https://hub.docker.com/r/minio/minio/)
 1. [GPDB open source docker image](https://hub.docker.com/r/kochanpivotal/gpdb5oss/)
 
-
 This document assumes you have basic working knowledge to use docker, docker-compose and Linux/Mac terminal.
 
 ## How to run docker-compose
@@ -42,13 +41,11 @@ minio1         |
 2. Enter "minio" for Access Key. Enter "minio123" for Secret Key.
 
 3. Verify the minio console shows 3 files are created.
-
 ```
 read_stocks.sql
 stocks.csv
 testdata.csv    
 ```
-
 
 ## How to access Greenplum docker instance
 
@@ -59,7 +56,6 @@ $ docker exec -it gpdbminio bash
 ```
 
 2. Verify Greenplum process is running by running `ps -elf | grep gpdb`
-
 ```
 root@gpdb-minio:/# ps -elf | grep gpdb
 5 S gpadmin    197     0  0  80   0 - 108576 -     18:59 ?        00:00:00 /opt/gpdb/bin/postgres -D /gpdata/segments/gpseg0 -p 40000 --gp_dbid=2 --gp_num_contents_in_cluster=2 --silent-mode=true -i -M mirrorless --gp_contentid=0
@@ -67,7 +63,6 @@ root@gpdb-minio:/# ps -elf | grep gpdb
 5 S gpadmin    229     0  0  80   0 - 98064 -      18:59 ?        00:00:00 /opt/gpdb/bin/postgres -D /gpdata/master/gpseg-1 -p 5432 --gp_dbid=1 --gp_num_contents_in_cluster=2 --silent-mode=true -i -M master --gp_contentid=-1 -x 0 -E
 0 S root       278    18  0  80   0 -  3235 -      19:01 pts/1    00:00:00 grep --color=auto gpdb
 ```
-
 
 ## How to read data from Minio via GPDB - S3 extension
 This section describes how to enable S3 protocol on GPDB, followed by creating sample external table that points to Minio object storage.
